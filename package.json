@@ -1,0 +1,38 @@
+{
+  "name": "podcast-express-api",
+  "version": "1.0.0",
+  "description": "podcast express api",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js",
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+    "start": "node src"
+  },
+  "author": "sra405@hotmai.co.uk",
+  "license": "ISC",
+  "dependencies": {
+    "commitizen": "^4.2.4",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "ramda": "^0.27.1",
+    "rss-parser": "^3.12.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "jest": "^27.0.4",
+    "supertest": "^6.1.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
