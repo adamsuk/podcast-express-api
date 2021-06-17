@@ -30,7 +30,6 @@ All `GET` commands come pre-packaged so firing off a standard request to these w
 When ran in dev mode a `POST` to `http://localhost:3001/podcasts` with request body:
 ```
 { 
-    "name": "No Such Thing As A Fish",
     "feed_url": "https://audioboom.com/channels/2399216.rss",
     "podcast_filter": {
         "key": "episode",
