@@ -1,7 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var url = require('url');
-var { InvalidReqError, InvalidMethodError, InvalidPathError } = require("../errors");
+var { InvalidReqError, InvalidMethodError, InvalidPathError } = require("./../infra/errors");
 
 var getFilesInDirectory = async (base_path, ext) => {
     const files = await fs.promises.readdir(base_path);
