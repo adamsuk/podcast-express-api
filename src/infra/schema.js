@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const schema = Joi.object().keys({
+const post_schema = Joi.object().keys({
   feed_url: Joi.string().uri().required(),
   podcast_filter: Joi.object({
     "key": Joi.string().required(),
@@ -9,4 +9,6 @@ const schema = Joi.object().keys({
   }).optional(),
 });
 
-module.exports = schema;
+module.exports = {
+  POST: post_schema
+};

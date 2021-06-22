@@ -1,7 +1,7 @@
 var schema = require("./schema");
 const Joi = require('joi');
 
-const dataToValidate = { 
+const postDataToValidate = { 
   feed_url: "https://audioboom.com/channels/2399216.rss",
   podcast_filter: {
     key: "episode",
@@ -10,10 +10,10 @@ const dataToValidate = {
   }
 }
 
-describe('Validate Basic Schema Inputs', () => {
-  it(`should test reponse is ${dataToValidate}`, () => {
-    var result = schema.validate(dataToValidate)
-    expect(result).toEqual({value: dataToValidate});
+describe('Validate Basic POST Schema Inputs', () => {
+  it(`should test reponse is ${postDataToValidate}`, () => {
+    var result = schema.POST.validate(postDataToValidate)
+    expect(result).toEqual({value: postDataToValidate});
     expect(result.error).toBeUndefined();
   })
 });
