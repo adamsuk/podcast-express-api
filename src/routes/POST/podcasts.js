@@ -1,5 +1,7 @@
-var { find_all_podcasts, filter_podcasts } = require("../../logic/read-rss-feed");
-var podcasts = require("../../data/podcasts.json");
+var { find_all_podcasts, filter_podcasts } = require("./../../logic/read-rss-feed");
+var podcasts = require("./../../data/podcasts.json");
+var { InvalidReqError } = require("./../../infra/errors");
+
 var _ = require('lodash/core');
 
 var get_req_podcasts = (req, res, next) => {
