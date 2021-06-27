@@ -1,5 +1,4 @@
 # Podcast API - Express
-![Heroku](https://heroku-badge.herokuapp.com/?app=sra405-podcast-express-api&root=status)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This repo contains the source code for a backend express API for obtaining podcasts from RSS feeds. This builds on my Express.js API boilerplate.
