@@ -1,7 +1,7 @@
 var Parser = require('rss-parser');
 var { sorter } = require('./podcast-sorter');
 
-var find_all_podcasts = async ({ feed_url, podcast_sort=null }) => {
+var find_all_podcasts = async ({ feed_url, podcast_sort = null }) => {
   var parser = new Parser();
   return parser.parseURL(feed_url).then((feed) => {
     var podcasts = [];
@@ -9,11 +9,12 @@ var find_all_podcasts = async ({ feed_url, podcast_sort=null }) => {
     feed.items.forEach((item) => {
       podcasts.push({
         episode: parseInt(item.itunes.episode),
-        show: item.itunes.author,
+        show: item.itunes.author || feed.title,
         title: item.title,
         url: item.enclosure.url,
         type: item.enclosure.type,
-        image: item.itunes.image
+        image: item.itunes.image,
+        date: new Date(item.pubDate)
       });
     });
     // is sorting needed?
