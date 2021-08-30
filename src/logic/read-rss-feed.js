@@ -13,7 +13,7 @@ var find_all_podcasts = async ({ feed_url, podcast_sort = null }) => {
         title: item.title,
         url: item.enclosure.url,
         type: item.enclosure.type,
-        image: item.itunes.image || item.image || feed.image,
+        image: item.itunes.image || item.image || feed.image.url,
         date: new Date(item.pubDate)
       });
     });
