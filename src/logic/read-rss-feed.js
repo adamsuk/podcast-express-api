@@ -10,7 +10,7 @@ var find_all_podcasts = async ({ feed_url, podcast_sort = null }) => {
       podcasts.push({
         episode: parseInt(item.itunes.episode),
         show: item.itunes.author || feed.title,
-        title: item.title,
+        title: feed.title || item.title,
         url: item.enclosure.url,
         type: item.enclosure.type,
         image: item.itunes.image || item.image || feed.image.url,
