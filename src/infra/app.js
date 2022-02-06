@@ -1,10 +1,13 @@
 var express = require('express');
+var cors = require('cors');
 const R = require('ramda');
 
 var routes = require('../routes');
 var schema = require('./schema');
 
 var app = express();
+app.use(cors())
+
 // parse request body as JSON
 app.use(express.json());
 
