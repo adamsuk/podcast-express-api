@@ -21,7 +21,6 @@
       "main"
     ],
     "plugins": [
-      "@semantic-release/npm",
       "@semantic-release/github",
       [
         "@semantic-release/git",
@@ -85,7 +84,7 @@
     "@semantic-release/commit-analyzer": "^11.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.2.1",
-    "@semantic-release/npm": "^11.0.0",
+    
     "@semantic-release/release-notes-generator": "^12.0.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
