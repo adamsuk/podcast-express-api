@@ -18,6 +18,8 @@ function handleCORS(request) {
   var origin = request.headers.get('Origin') || '';
   return corsHeaders(origin);
 }
+
+var RSS_URLS = [
   "https://audioboom.com/channels/2399216.rss",
   "https://rss.acast.com/mydadwroteaporno",
   "https://rss.acast.com/adambuxton",
