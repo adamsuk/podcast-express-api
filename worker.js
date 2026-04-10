@@ -1,4 +1,23 @@
-var RSS_URLS = [
+var CORS_ORIGINS = [
+  'https://sradams-co-uk-content.pages.dev',
+  'https://sradams.co.uk'
+];
+
+function corsHeaders(origin) {
+  if (CORS_ORIGINS.includes(origin)) {
+    return {
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    };
+  }
+  return { 'Access-Control-Allow-Origin': '*' };
+}
+
+function handleCORS(request) {
+  var origin = request.headers.get('Origin') || '';
+  return corsHeaders(origin);
+}
   "https://audioboom.com/channels/2399216.rss",
   "https://rss.acast.com/mydadwroteaporno",
   "https://rss.acast.com/adambuxton",
@@ -123,9 +142,15 @@ async function handleRequest(request) {
   var url = new URL(request.url);
   var path = url.pathname.slice(1);
   var method = request.method;
+  var origin = request.headers.get('Origin') || '';
+  var cors = handleCORS(request);
+  
+  if (method === 'OPTIONS') {
+    return new Response('', { status: 204, headers: cors });
+  }
   
   if (method === 'GET' && path === 'status') {
-    return new Response('Healthy', { status: 200 });
+    return new Response('Healthy', { status: 200, headers: cors });
   }
   
   if (method === 'GET' && path === 'all-podcasts') {
@@ -137,7 +162,7 @@ async function handleRequest(request) {
     var sorted = sorter(allPodcasts.flat(1), { key: 'date', type: 'descending' });
     return new Response(JSON.stringify(sorted), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: Object.assign({ 'Content-Type': 'application/json' }, cors)
     });
   }
   
@@ -151,7 +176,7 @@ async function handleRequest(request) {
     var randomIndex = Math.floor(Math.random() * flat.length);
     return new Response(JSON.stringify(flat[randomIndex]), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: Object.assign({ 'Content-Type': 'application/json' }, cors)
     });
   }
   
@@ -162,7 +187,7 @@ async function handleRequest(request) {
       return new Response(JSON.stringify({
         name: 'InvalidReqError',
         message: "Invalid request. Think you're missing a lil body"
-      }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+      }), { status: 400, headers: Object.assign({ 'Content-Type': 'application/json' }, cors) });
     }
     
     var feedUrl = body.feed_url;
@@ -174,21 +199,21 @@ async function handleRequest(request) {
       var filtered = await filterPodcasts(feedUrl, body.podcast_filter);
       return new Response(JSON.stringify(filtered), {
         status: 200,
-        headers: { 'Content-Type': 'application/json' }
+        headers: Object.assign({ 'Content-Type': 'application/json' }, cors)
       });
     }
     
     var found = await findAllPodcasts(feedUrl, body.podcast_sort);
     return new Response(JSON.stringify(found), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
+      headers: Object.assign({ 'Content-Type': 'application/json' }, cors)
     });
   }
   
   return new Response(JSON.stringify({
     status: 'Error',
     message: 'Path not found'
-  }), { status: 404, headers: { 'Content-Type': 'application/json' } });
+  }), { status: 404, headers: Object.assign({ 'Content-Type': 'application/json' }, cors) });
 }
 
 addEventListener('fetch', function(event) {
