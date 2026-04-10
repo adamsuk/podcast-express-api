@@ -1,0 +1,5 @@
+name = "podcast-api"
+account_id = "fcaa04edb848e219bd85f8bfedb0c5b9"
+main = "worker.js"
+compatibility_date = "2024-02-02"
+node_compat = true
